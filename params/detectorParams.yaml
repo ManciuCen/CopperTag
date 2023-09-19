@@ -1,0 +1,68 @@
+
+detector_params:
+  # the parameter specifying the approximation accuracy when using cv::approxPolyDP() for the first time
+  # This is the maximum distance between the original curve and its approximation.
+  # increase: generate less salient point; decrease: generate more salient point; default: 4
+  line_error                : 4
+
+  # the parameter indicating whether two lines (formed by 3 points) are collinear
+  # if the included angle between two lines less than this value, then they are in_line(); default: 40(degree)
+  corner_sway_thresh        : 30
+  
+  # the maximum distance between an valid estimation corner and its existing corner (assume it is existed)
+  # only used to check the distance between estc1-realc1 and estc3-realc3
+  # increase: generate more candidate quad(loose); decrease: generate less candidate quad(strict); default: 7(pixel)
+  est_corner_thresh         : 7
+
+  # maxDist is the maximum distance a corner could be quad corner away from ellpise
+  # maxDist = ellipse_major_axis / max_dist_k;
+  # increase: allow less nearby corners(strict); decrease: allow more nearby corners(loose); default: 2
+  max_dist_k                : 2
+
+  # the minimum lenght of an valid line in CopperTag detection
+  # increase: generate less lines(strict); decrease: generate more lines(loose); default: 7(pixel)
+  min_line_len              : 7
+  
+  # the parameter used to check whether current contour should be used for AAMED ellipse detection
+  # not recommended for modification
+  min_dp_contour_num        : 4
+
+  # the parameter indicating whether two lines are close enough to form a corner
+  # if the minimum distance between two lines are smaller than this value, then these two lines can used to form corner
+  # increase: generate more corners(loose); decrease: generate less corners(strict); default: 20(pixel)
+  corner_line_dist          : 20
+
+  # used in two situation:
+  #  1. the included angle between two lines should bigger than this value, otherwise they will not used to form corner
+  #  2. in same-side situation: the angle_diff between the corresponding lines of facing corners should not bigger than this value
+  corner_line_angle         : 22.5
+
+  # the parameter indicating whether a line should refines its start_p and end_p
+  # if the length of one line is exceed this value*3, then use line_refinement(); default: 12(pixel)
+  # also, the refine range is equal to this value
+  corner_refine_scan_dist   : 12
+
+  # the parameter specifying the approximation accuracy when using cv::approxPolyDP() for the second time(in line_refinement)
+  # This is the maximum distance between the original curve and its approximation.
+  # increase: generate less salient point; decrease: generate more salient point; default: 0.8
+  corner_refine_thresh      : 0.8
+
+camera_params:
+  # camera width
+  width   : 1280
+
+  # camera height
+  height  : 720
+
+  # camera intrinsic parameter
+  fx      : 100
+  fy      : 90
+  cx      : 80
+  cy      : 70
+
+  # camera distortion parameter
+  k1      : 60
+  k2      : 50
+  p1      : 40
+  p2      : 30
+  k3      : 20
